@@ -1,11 +1,117 @@
 @import url(base.css);
 
-input,
-select,
-textarea {
-  width: 100%;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
+    background-color: #0f0f1a;
+    color: #e0e0e0;
+    padding: 2rem;
+}
+
+h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+form {
+    background-color: #1c1c2e;
+    border: 1px solid #2a2a40;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 640px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 div {
-  margin: 4px 0px;
+    margin: 0.75rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    background-color: #121220;
+    border: 1px solid #2a2a40;
+    border-radius: 6px;
+    color: #e0e0e0;
+    font-family: inherit;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    transition: border-color 0.15s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #4a4a7a;
+}
+
+select[multiple] {
+    padding: 0.25rem;
+}
+
+select[multiple] option {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+select[multiple] option:checked {
+    background-color: #2e2e4a;
+    color: #a9a9ff;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+}
+
+button {
+    background-color: transparent;
+    border: 1px solid #4a4a7a;
+    color: #a9a9ff;
+    padding: 0.4rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+button:hover {
+    background-color: #4a4a7a;
+    color: #ffffff;
+}
+
+button[onclick="putMovie()"] {
+    background-color: #3a3a6a;
+    border-color: #6a6aaa;
+    color: #ffffff;
+}
+
+button[onclick="putMovie()"]:hover {
+    background-color: #5a5aaa;
 }

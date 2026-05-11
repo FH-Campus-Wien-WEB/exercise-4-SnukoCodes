@@ -1,20 +1,155 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-  font-family: "Trebuchet MS", sans-serif;
-  background-color: brown;
-  color: beige;
+    font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
+    background-color: #0f0f1a;
+    color: #e0e0e0;
+    margin: 0;
 }
 
-main {
-  color: #333;
+h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.25rem;
 }
 
-button {
-    padding: 4px;
-    border-width: 1px;
-    border-radius: 4px;
-    font-size: 105%;
+h3 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888;
+    margin-bottom: 0.4rem;
 }
 
-button:hover {
-  background-color: darkgray;
+article {
+    background-color: #1c1c2e;
+    border: 1px solid #2a2a40;
+    border-radius: 12px;
+    margin: 1.5rem auto;
+    max-width: 860px;
+    display: flex;
+    gap: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+article:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+article figure {
+    flex-shrink: 0;
+}
+
+article figure img {
+    display: block;
+    width: 240px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+.movie-body {
+    flex: 1;
+    padding: 1.25rem 1.25rem 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.movie-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.movie-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: #aaa;
+}
+
+.movie-meta span strong {
+    color: #ccc;
+}
+
+.rating {
+    color: #f5c518;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.rating::before {
+    content: "★ ";
+}
+
+.genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+span.genre {
+    background-color: #2e2e4a;
+    color: #a9a9ff;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    border: 1px solid #3d3d6b;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+.movie-plot {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #bbb;
+}
+
+.movie-credits {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.credit-group ul {
+    list-style: none;
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+.credit-group ul li {
+    padding: 0.1rem 0;
+}
+
+.btn-edit {
+    flex-shrink: 0;
+    background-color: transparent;
+    border: 1px solid #4a4a7a;
+    color: #a9a9ff;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+    white-space: nowrap;
+}
+
+.btn-edit:hover {
+    background-color: #4a4a7a;
+    color: #ffffff;
 }

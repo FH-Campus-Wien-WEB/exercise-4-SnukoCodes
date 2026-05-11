@@ -1,44 +1,250 @@
-@import url(layout.css);
+@import url(base.css);
+
+html, body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: #0f0f1a;
+  color: #e0e0e0;
+}
 
 body {
-  background-image: url('images/background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-article {
-  background-color: rgba(211, 211, 211, 0.9);
-  border-radius: 16px;
-  padding: 16px;
-  width: 384px;
-  margin: 8px;
+@media (max-width: 767px) {
+  body {
+    max-width: 100%;
+    padding: 0 0.75rem;
+  }
 }
 
-article button {
-  margin: 0px 2px;
-}
-
-main {
-  display: flex;
-  flex-wrap: wrap;
+h1 {
+  font-size: 2rem;
+  margin: 0;
 }
 
 header {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+}
+
+.user-greeting {
+  color: #ccc;
+  font-size: 0.95rem;
+  text-align: right;
+  max-width: 48rem;
+}
+
+nav {
+  display: flex;
   flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+nav h2 {
+  margin: 0;
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+nav li {
+  width: 100%;
+}
+
+nav button {
+  width: 100%;
+}
+
+button,
+.btn-edit {
+  background-color: transparent;
+  border: 1px solid #4a4a7a;
+  color: #a9a9ff;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+button:hover,
+.btn-edit:hover {
+  background-color: #4a4a7a;
+  color: #ffffff;
+}
+
+nav button {
+  width: 100%;
+}
+
+main {
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   justify-content: center;
+  align-content: flex-start;
+  padding: 1rem;
+}
+
+.movie-header > div {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   align-items: center;
 }
 
-span {
-  margin-right: 4px;
+.movie-header h2 {
+  margin: 0;
 }
 
-.genre {
-  padding: 4px 8px;
-  border: solid black 1px;
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+}
+
+footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  color: #888;
+}
+
+footer a {
+  color: #7fafed;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  body {
+    display: grid;
+    grid-template-columns: minmax(192px, 256px) auto;
+    grid-template-rows: minmax(64px, 128px) auto minmax(64px, 128px);
+    grid-template-areas:
+      "h h"
+      "n m"
+      "f f";
+  }
+
+  header { grid-area: h; }
+  nav    { grid-area: n; }
+  main   { grid-area: m; }
+  footer { grid-area: f; }
+}
+
+/* Dialogs */
+dialog {
+  border: none;
+  background: none;
+  padding: 0;
+  display: none;
+  margin: 0;
+}
+
+dialog[open], dialog:modal {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+dialog > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #1c1c2e;
+  border: 1px solid #2a2a40;
+  border-radius: 16px;
+  padding: 1.5rem;
+  max-width: 420px;
+  width: min(100%, 420px);
+  margin: 0;
+}
+
+dialog label {
+  display: block;
+  margin: 0.75rem 0 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #888;
+}
+
+dialog input {
+  width: 100%;
+  background-color: #121220;
+  border: 1px solid #2a2a40;
   border-radius: 6px;
-  background-color: darkgray;
-  font-weight: bold;
+  color: #e0e0e0;
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.75rem 0.85rem;
+}
+
+dialog button {
+  background-color: transparent;
+  border: 1px solid #4a4a7a;
+  color: #a9a9ff;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+  margin-right: 0.5rem;
+}
+
+dialog button:hover {
+  background-color: #4a4a7a;
+  color: #ffffff;
+}
+
+#searchResults > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid #2a2a40;
+}
+
+#searchResults p {
+  margin: 0;
 }

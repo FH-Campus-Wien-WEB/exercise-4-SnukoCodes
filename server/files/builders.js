@@ -9,7 +9,11 @@ export class ElementBuilder {
   }
 
   class(clazz) {
-    this.element.classList.add(clazz);
+    if (typeof clazz === 'string' && clazz.includes(' ')) {
+      this.element.classList.add(...clazz.split(' ').filter(Boolean));
+    } else {
+      this.element.classList.add(clazz);
+    }
     return this;
   }
 
@@ -101,34 +105,58 @@ function formatRuntime(runtime) {
 
 export class MovieBuilder extends ElementBuilder {
   constructor(movie, deleteMovie, isLoggedIn) {
-    super("article")
-      .id(movie.imdbID)
-      .append(new ElementBuilder("img").with("src", movie.Poster))
-      .append(new ElementBuilder("h1").text(movie.Title));
+    super("article").id(movie.imdbID);
+
+    const figure = new ElementBuilder("figure").append(
+      new ElementBuilder("img").with("src", movie.Poster).with("alt", movie.Title)
+    );
+
+    const body = new ElementBuilder("section").class("movie-body");
+
+    const header = new ElementBuilder("header").class("movie-header");
+    header.append(new ElementBuilder("h2").text(movie.Title));
 
     if (isLoggedIn) {
-      this.append(
-        new ElementBuilder("p")
-          .append(new ButtonBuilder("Edit").onclick(() => location.href = "edit.html?imdbID=" + movie.imdbID))
-          .append(new ButtonBuilder("Delete").onclick(() => deleteMovie(movie.imdbID)))
-      );
+      const actions = new ElementBuilder("div");
+      actions.append(new ButtonBuilder("Edit").onclick(() => location.href = "edit.html?imdbID=" + movie.imdbID));
+      actions.append(new ButtonBuilder("Delete").onclick(() => deleteMovie(movie.imdbID)));
+      header.append(actions);
     }
 
-    this.append(
-        new ParagraphBuilder().items(
-          "Runtime " + formatRuntime(movie.Runtime),
-          "\u2022",
-          "Released on " + new Date(movie.Released).toLocaleDateString("en-US")
-        )
+    body.append(header);
+
+    body.append(
+      new ElementBuilder("p")
+        .class("movie-meta")
+        .append(new ElementBuilder("span").text("Runtime " + formatRuntime(movie.Runtime)))
+        .append(new ElementBuilder("span").text("•"))
+        .append(new ElementBuilder("span").text("Released on " + new Date(movie.Released).toLocaleDateString("en-US")))
+    );
+
+    const genres = new ElementBuilder("p").class("genres");
+    for (const genre of movie.Genres) {
+      genres.append(new ElementBuilder("span").class("genre").text(genre));
+    }
+    body.append(genres);
+
+    body.append(new ElementBuilder("p").class("movie-plot").text(movie.Plot));
+
+    body.append(new ElementBuilder("footer").class("movie-credits")
+      .append(new ElementBuilder("section").class("credit-group directors")
+        .append(new ElementBuilder("h3").text(movie.Directors.length > 1 ? "Directors" : "Director"))
+        .append(new ListBuilder().items(movie.Directors))
       )
-      .append(new ParagraphBuilder().childClass("genre").items(movie.Genres))
-      .append(new ElementBuilder("p").text(movie.Plot))
-      .append(new ElementBuilder("h2").pluralizedText("Director", movie.Directors))
-      .append(new ListBuilder().items(movie.Directors))
-      .append(new ElementBuilder("h2").pluralizedText("Writer", movie.Writers))
-      .append(new ListBuilder().items(movie.Writers))
-      .append(new ElementBuilder("h2").pluralizedText("Actor", movie.Actors))
-      .append(new ListBuilder().items(movie.Actors));
+      .append(new ElementBuilder("section").class("credit-group writers")
+        .append(new ElementBuilder("h3").text(movie.Writers.length > 1 ? "Writers" : "Writer"))
+        .append(new ListBuilder().items(movie.Writers))
+      )
+      .append(new ElementBuilder("section").class("credit-group actors")
+        .append(new ElementBuilder("h3").text(movie.Actors.length > 1 ? "Actors" : "Actor"))
+        .append(new ListBuilder().items(movie.Actors))
+      )
+    );
+
+    this.append(figure).append(body);
   }
 }
 
